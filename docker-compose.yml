@@ -1,0 +1,23 @@
+# docker-compose.yml
+# Lukas Koschmieder <lukas.koschmieder@rwth-aachen.de>
+# (c) 2016-18 ICMEaix RWTH Aachen University
+
+version: '2'
+services:
+    mariadb:
+        image: mariadb:latest
+        container_name: mariadb
+
+        network_mode: bridge
+        ports:
+            - 3306:3306 # SQL
+
+        volumes:
+            - ./vol_mysql:/var/lib/mysql
+            - ./vol_conf.d:/etc/mysql/conf.d
+
+        environment:
+            - MYSQL_DATABASE=owncloud
+            - MYSQL_USER=owncloud
+            - MYSQL_PASSWORD=owncloud
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
